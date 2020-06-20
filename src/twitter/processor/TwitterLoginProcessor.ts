@@ -10,14 +10,13 @@ export class TwitterLoginProcessor{
             await page.goto('https://twitter.com/login');
             await page.type('input[name="session[username_or_email]"]', process.env.user);
             await page.type('input[name="session[password]"]', process.env.password);
-            await page.click('div[data-testid="LoginForm_Login_Button"]');
-            await page.waitForNavigation()
+            await Promise.all([
+                page.waitForNavigation(),
+                page.click('div[data-testid="LoginForm_Login_Button"]')
+            ]);
             await page.screenshot({ path: PathUtils.getFilePath(screenshot) })
             console.log('See screenshot: ' + screenshot)
         })()
-
-        debugger;
-
         return page;
     }
 }
