@@ -6,8 +6,6 @@ export class ChatworkUtils {
 
     private static baseUrl: string = 'https://api.chatwork.com/v2/';
 
-
-
     private static getClient() {
         const client = axios.create({
             baseURL: 'https://api.chatwork.com/v2/',
@@ -16,9 +14,19 @@ export class ChatworkUtils {
         return client;
     }
 
-    public static sendMesages(room: ChatworkRoomBase, body: string): void {
+    public static async sendMesages(room: ChatworkRoomBase, body: string) {
         let client = this.getClient();
         let room_id = room.getRoomId();
-        client.post(`rooms/${room_id}/messages`, `body=${body}`).catch(console.log);
+        let message_id: string = '';
+        await client.post(`rooms/${room_id}/messages`, `body=${body}`).then(res => {
+            message_id = res.data.message_id;
+        }).catch(console.log);
+        return message_id;
+    }
+
+    public static updateMessages(room: ChatworkRoomBase, body: string, message_id: string) {
+        let client = this.getClient();
+        let room_id = room.getRoomId();
+        client.put(`rooms/${room_id}/messages/${message_id}`, `body=${body}`).catch(console.log);
     }
 }

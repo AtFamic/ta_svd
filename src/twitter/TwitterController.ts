@@ -5,6 +5,7 @@ import { CollegeBase } from "./enums/CollegeBase";
 import { TwitterChangeAccounts } from "./processor/TwitterChangeAccounts";
 import { TwitterChangeStatus } from "./processor/TwitterChangeStatus";
 import { TwitterAdStatus } from "./enums/TwitterAdStatus";
+import { TwitterCheckProcesses } from "./processor/TwitterCheckProcesses";
 
 export class TwitterController {
 
@@ -39,5 +40,17 @@ export class TwitterController {
 
     public async changeStatus(account: CollegeBase, status: TwitterAdStatus) {
         this.page = await TwitterChangeStatus.changeStatus(this.page, account, status);
+    }
+
+    public async initiateProcess(accounts: CollegeBase[]) {
+        await TwitterCheckProcesses.initiate(accounts);
+    }
+
+    public async updateProcess(account: CollegeBase) {
+        await TwitterCheckProcesses.update(account);
+    }
+
+    public checkProcess() {
+        return TwitterCheckProcesses.checkProcesses();
     }
 }
