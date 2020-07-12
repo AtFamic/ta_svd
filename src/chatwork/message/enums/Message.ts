@@ -36,6 +36,12 @@ export class Message {
     /** 実行失敗 */
     public static failWorking: string = '実行失敗';
 
+    /** 実行結果レポートの出力に成功しました。 */
+    public static successToCreatePDF: string = ' 実行結果レポートの出力に成功しました。';
+
+    /** 実行結果レポートの出力に失敗しました。 */
+    public static failToCreatePDF: string = ' 実行結果レポートの出力に失敗しました。';
+
     private numberOfDots: number = 0;
 
     /** loading... */

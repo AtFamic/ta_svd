@@ -17,11 +17,11 @@ export class MessageProcessor {
      * initiate header message
      * @param twitterAdStatus 
      */
-    public initiateMessage(twitterAdStatus: TwitterAdStatus){
+    public initiateMessage(twitterAdStatus: TwitterAdStatus) {
         this.header = Message.processStartMessage + Message.CRLF;
-        if(twitterAdStatus.getStatus() === 'ON'){
+        if (twitterAdStatus.getStatus() === 'ON') {
             this.header = this.header + Message.turnStatusOn + Message.CRLF;
-        }else{
+        } else {
             this.header += Message.turnStatusOff + Message.CRLF;
         }
     }
@@ -30,18 +30,20 @@ export class MessageProcessor {
      * update Main message, which notifies loading situation
      * @param accounts 
      */
-    public updateMain(){
+    public updateMain(isFinished?:boolean) {
         this.main = '';
-        this.main = this.message.getLoading() + Message.CRLF;
+        if(!isFinished){
+            this.main = this.message.getLoading() + Message.CRLF;
+        }
         this.main += Message.label + Message.CRLF;
         let twitterController = new TwitterController;
         let accounts: CollegeBase[] = twitterController.checkProcess();
-        if(!accounts){
+        if (!accounts) {
             return;
         }
-        for(let i = 0; i < accounts.length; i++){
+        for (let i = 0; i < accounts.length; i++) {
             this.main += accounts[i].getName() + Message.SPACE + Message.status;
-            switch(accounts[i].getStatus()){
+            switch (accounts[i].getStatus()) {
                 case 'WAITING':
                     this.main += Message.waitForWorking + Message.CRLF;
                     break;
@@ -53,10 +55,17 @@ export class MessageProcessor {
                     break;
             }
         }
+        if(isFinished){
+            this.main += Message.CRLF + Message.endStatus;
+        }
     }
 
-    public getMessage(){
+    public getMessage() {
         return this.header + this.main;
     }
 
+    public getFinishedMessage(): string {
+        this.updateMain(true);
+        return this.getMessage();
+    }
 }

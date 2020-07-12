@@ -12,6 +12,7 @@ export class TwitterChangeStatus {
             targetTag = 'div.is-checked';
         }
         const screenshot = `twitter-changeStatus-${college.getName()}.png`;
+        const pdf_name = `twitter-changeStatus-${college.getName()}.pdf`
         let counter: number = 0; // number of clicks
         let loop: number = 0 // number of loops
         // loop until when no more handles are found
@@ -30,6 +31,7 @@ export class TwitterChangeStatus {
             }
         }
         await page.screenshot({ path: PathUtils.getFilePath(screenshot), fullPage: true });
+        await page.pdf({ path: PathUtils.getPDFFilePath(pdf_name) })
         console.log('See screenshot: ' + screenshot);
         return page;
     }

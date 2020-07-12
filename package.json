@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/lodash": "^4.14.157",
     "@types/node": "^14.0.13",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5"
@@ -18,7 +19,10 @@
   "dependencies": {
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
+    "easy-pdf-merge": "^0.2.2",
+    "form-data": "^3.0.0",
     "lodash": "^4.17.15",
+    "node-cron": "^2.0.3",
     "puppeteer": "^3.3.0"
   }
 }

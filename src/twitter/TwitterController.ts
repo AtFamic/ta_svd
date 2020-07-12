@@ -53,4 +53,12 @@ export class TwitterController {
     public checkProcess() {
         return TwitterCheckProcesses.checkProcesses();
     }
+
+    public checkFinished(accounts: CollegeBase[]) {
+        TwitterCheckProcesses.checkFinished(accounts);
+    }
+
+    public isFinished(): boolean{
+        return TwitterCheckProcesses.finished();
+    }
 }
