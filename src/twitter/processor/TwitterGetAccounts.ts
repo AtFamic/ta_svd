@@ -4,6 +4,7 @@ import { OsakaFukusoGakuin } from "../enums/OsakaFukusoGakuin";
 import { OsakaOngakuDaigaku } from "../enums/OsakaOngakuDaigaku";
 import { ShingakuCareer } from "../enums/ShingakuCareer";
 import { SocialGoodProject } from "../enums/SocialGoodProject";
+import { MusashiCollege } from "../enums/MusashiCollege";
 
 export class TwitterGetAccounts {
 
@@ -13,7 +14,8 @@ export class TwitterGetAccounts {
             new OsakaFukusoGakuin,
             new OsakaOngakuDaigaku,
             new KeiwaCollege,
-            new SocialGoodProject
+            new SocialGoodProject,
+            new MusashiCollege
         ];
     }
 }

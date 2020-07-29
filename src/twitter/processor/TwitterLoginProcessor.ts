@@ -8,6 +8,8 @@ export class TwitterLoginProcessor{
         const url = 'https://twitter.com';
         await (async () => {
             await page.goto('https://twitter.com/login');
+            await page.screenshot({ path: PathUtils.getFilePath(screenshot) })
+            console.log('See screenshot: ' + screenshot)
             await page.type('input[name="session[username_or_email]"]', process.env.user);
             await page.type('input[name="session[password]"]', process.env.password);
             await Promise.all([

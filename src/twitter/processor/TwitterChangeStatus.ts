@@ -18,9 +18,9 @@ export class TwitterChangeStatus {
         // loop until when no more handles are found
         while (true) {
             loop++;
+            await page.waitFor(30000);
             const handles = await page.$$(`${targetTag}`);
             console.log(`targetTag is ${targetTag} and handles are ${handles}, and # of loops is ${loop}`);
-            await page.waitFor(15000);
             for (const handle of handles) {
                 await handle.click();
                 console.log('this is a click of #' + ++counter);
