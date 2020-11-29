@@ -8,6 +8,9 @@ import { MusashiCollege } from "../enums/MusashiCollege";
 
 export class TwitterGetAccounts {
 
+    /**
+     * return accounts you want to use.
+     */
     public static getAccounts(): CollegeBase[] {
         return [
             new ShingakuCareer,
