@@ -18,7 +18,7 @@ export class TwitterChangeStatus {
         let counter: number = 0; // number of clicks
         let loop: number = 0 // number of loops
         // アカウントにFilterが設定されている場合、フィルタを実施
-        await this.filterAccounts(page, college);
+        await this.filterAccounts(page, college, status);
         // loop until when no more handles are found
         while (true) {
             loop++;
@@ -51,42 +51,42 @@ export class TwitterChangeStatus {
          * 2. 「ステータス」を押下(ステータスのキャンセル)
          * 3. 「ステータス」を再度押下
          * 4. 「ステータス：すべて」を押下
-         * 5. 「実行中」を押下
+         * 5. 「停止中」(ONの場合) or 「実行中」(OFFの場合)を押下
          * 6. 「適用する」を押下
      */
-    public static async filterAccounts(page: any, college: CollegeBase) {
+    public static async filterAccounts(page: any, college: CollegeBase, status: TwitterAdStatus) {
         console.log('filter begins');
         if (college.getFilter()) {
             let waitingTime: number = 500;
             await page.waitFor(waitingTime);
             // 1. 「＋フィルターを追加」ボタンを押下
             console.log('1. 「＋フィルターを追加」ボタンを押下');
-            await page.click(Filter.addFilterId);
+            await page.click(Filter.getAddFilterId());
             await page.waitFor(waitingTime);
             await page.screenshot({ path: PathUtils.getFilePath("1.「＋フィルターを追加」ボタンを押下.png"), fullPage: true });
             // 2. 「ステータス」を押下(ステータスのキャンセル)
             console.log('2. 「ステータス」を押下(ステータスのキャンセル');
-            await page.click(Filter.filterStatusId);
+            await page.click(Filter.getFilterStatusId());
             await page.waitFor(waitingTime);
             await page.screenshot({ path: PathUtils.getFilePath("2.「ステータス」を押下(ステータスのキャンセル).png"), fullPage: true });
             // 3. 「ステータス」を再度押下
             console.log('3. 「ステータス」を再度押下');
-            await page.click(Filter.filterStatusId);
+            await page.click(Filter.getFilterStatusId());
             await page.waitFor(waitingTime);
             await page.screenshot({ path: PathUtils.getFilePath("3.「ステータス」を再度押下.png"), fullPage: true });
             // 4. 「ステータス：すべて」を押下
             console.log('4. 「ステータス：すべて」を押下');
-            await page.click(Filter.statusAll);
+            await page.click(Filter.getStatusAll());
             await page.waitFor(waitingTime);
             await page.screenshot({ path: PathUtils.getFilePath("4.「ステータス：すべて」を押下.png"), fullPage: true });
-            // 5. 「実行中」を押下
-            console.log('5. 「実行中」を押下');
-            await page.click(Filter.filterWorkingStatusId);
+            // 5. 「停止中」(ONの場合) or 「実行中」(OFFの場合)を押下
+            console.log('5. 「停止中」(ONの場合) or 「実行中」(OFFの場合)を押下');
+            await page.click(Filter.getFilterWorkingStatusId(status));
             await page.waitFor(waitingTime);
             await page.screenshot({ path: PathUtils.getFilePath("5.「実行中」を押下.png"), fullPage: true });
             // 6. 「適用する」を押下
             console.log('6. 「適用する」を押下');
-            await page.click(Filter.applyFilterId);
+            await page.click(Filter.getApplyFilterId());
             await page.waitFor(waitingTime);
             await page.screenshot({ path: PathUtils.getFilePath("6.「適用する」を押下.png"), fullPage: true });
         }
