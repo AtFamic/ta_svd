@@ -1,13 +1,14 @@
 import { PathUtils } from "../../util/PathUtils";
 require('dotenv').config();
 
-export class TwitterLoginProcessor{
+export class TwitterLoginProcessor {
 
-    public static async login(page: any){
+    public static async login(page: any) {
         const screenshot = 'twitter-login.png';
         const url = 'https://twitter.com';
         await (async () => {
             await page.goto('https://twitter.com/login');
+            await page.waitFor(5000);
             await page.screenshot({ path: PathUtils.getFilePath(screenshot) });
             console.log('See screenshot: ' + screenshot);
             await page.type('input[name="session[username_or_email]"]', process.env.user);

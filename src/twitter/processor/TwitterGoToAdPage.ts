@@ -6,8 +6,7 @@ export class TwitterGoToAdPage {
         const screenshot = 'twitter-goToAdPage.png';
         const url = "https://ads.twitter.com/?ref=gl-tw-tw-twitter-ads-rweb";
         await (async () => {
-            await page.goto('https://ads.twitter.com/?ref=gl-tw-tw-twitter-ads-rweb');
-            await page.click('label[for="remember-me"]');
+            await page.goto('https://ads.twitter.com/account_select');
             await page.screenshot({ path: PathUtils.getFilePath(screenshot) })
             console.log('See screenshot: ' + screenshot)
         })()

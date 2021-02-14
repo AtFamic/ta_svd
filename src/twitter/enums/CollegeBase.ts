@@ -7,12 +7,14 @@ export class CollegeBase {
     protected id: string;
     protected processStatus: processStatus;
     protected needsFilter: boolean;
+    protected select_num: number;
 
-    constructor(name: string, id: string, needsFilter: boolean = false) {
+    constructor(name: string, id: string, select_num: number, needsFilter: boolean = false) {
         this.name = name;
         this.id = id; // identify by <img title>
         this.processStatus = 'WAITING'; // true when this account is completed
         this.needsFilter = needsFilter;
+        this.select_num = select_num;
     }
 
     public getName(): string {
@@ -37,5 +39,9 @@ export class CollegeBase {
 
     public getFilter(): boolean {
         return this.needsFilter;
+    }
+
+    public getSelectNum(): number {
+        return this.select_num;
     }
 }
