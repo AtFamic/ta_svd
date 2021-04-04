@@ -57,7 +57,7 @@ export class TwitterChangeStatus {
     public static async filterAccounts(page: any, college: CollegeBase, status: TwitterAdStatus) {
         console.log('filter begins');
         if (college.getFilter()) {
-            let waitingTime: number = 500;
+            let waitingTime: number = 1000;
             await page.waitFor(waitingTime);
             // 1. 「＋フィルターを追加」ボタンを押下
             console.log('1. 「＋フィルターを追加」ボタンを押下');
